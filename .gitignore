@@ -1,0 +1,22 @@
+node_modules/
+coverage/
+dist/
+# Secrets locaux : ne jamais versionner
+.env
+.env.docker
+
+# Rapport et presentation de stage : non publies
+rapport_stage_*.tex
+presentation_soutenance.md
+*.pdf
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+
+# Documents internes fournis par l'entreprise
+docs/sujet_stage_playground.md
+
+# Divers
+New Folder/

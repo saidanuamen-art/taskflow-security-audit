@@ -1,0 +1,14 @@
+﻿node_modules/
+.env
+dist/
+.git/
+.gitignore
+docs/
+*.log
+README.md
+*.md
+!package-lock.json
+.vscode/
+.idea/
+coverage/
+.env.docker

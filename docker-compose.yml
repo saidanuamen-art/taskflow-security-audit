@@ -1,0 +1,43 @@
+﻿version: "3.8"
+services:
+  postgres:
+    image: postgres:16
+    container_name: taskflow2_pg
+    environment:
+      POSTGRES_USER: taskflow
+      POSTGRES_PASSWORD: taskflow_dev_pw
+      POSTGRES_DB: taskflow
+    ports:
+      - "5432:5432"
+    volumes:
+      - taskflow2_pg_data:/var/lib/postgresql/data
+    networks:
+      - taskflow2_network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: taskflow2_app
+    ports:
+      - "3001:3000"
+    # Secrets (JWT_SECRET, DATABASE_URL) dans .env.docker, non versionne
+    env_file:
+      - .env.docker
+    environment:
+      PORT: 3000
+    volumes:
+      - ./src:/app/src
+      - ./db:/app/db
+    depends_on:
+      - postgres
+    networks:
+      - taskflow2_network
+    restart: unless-stopped
+
+volumes:
+  taskflow2_pg_data:
+
+networks:
+  taskflow2_network:
+    driver: bridge

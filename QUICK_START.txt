@@ -1,0 +1,40 @@
+﻿# Quick Reference - TaskFlow Instance 2
+
+## 🚀 Container Status
+taskflow2_pg  : Running on port 5433
+taskflow2_app : Running on port 3001
+
+## 📝 Quick Commands
+
+Start containers:     npm run docker:up
+Stop containers:      npm run docker:down
+View logs:            npm run docker:logs
+Restart app:          npm run docker:restart
+Init database:        npm run docker:db:init
+
+## 🧪 Test API
+
+Login:
+curl -X POST http://localhost:3001/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"owner@alpha.test","password":"Password123!"}'
+
+List Documents:
+curl http://localhost:3001/api/documents \
+  -H "Authorization: Bearer YOUR_TOKEN_HERE" \
+  -H "x-tenant-id: 11111111-1111-1111-1111-111111111111"
+
+## 📊 Test Accounts
+
+owner@alpha.test  | Password123! | Tenant Alpha | OWNER
+member@alpha.test | Password123! | Tenant Alpha | MEMBER
+owner@beta.test   | Password123! | Tenant Beta  | OWNER
+member@beta.test  | Password123! | Tenant Beta  | MEMBER
+
+## 🔗 URLs
+
+App:         http://localhost:3001
+PostgreSQL:  localhost:5433
+
+---
+For detailed documentation, see DOCKER_SETUP.md

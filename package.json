@@ -1,0 +1,51 @@
+{
+  "name": "taskflow-playground",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "ts-node-dev --respawn src/main.ts",
+    "db:init": "docker exec -i taskflow_pg psql -U taskflow -d taskflow < db/init.sql",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f app",
+    "docker:logs:all": "docker compose logs -f",
+    "docker:db:init": "docker exec -i taskflow2_pg psql -U taskflow -d taskflow < db/init.sql",
+    "docker:db:harden": "docker exec -i taskflow2_pg psql -U taskflow -d taskflow < db/harden_rls.sql && docker exec -i taskflow2_pg psql -U taskflow -d taskflow < db/harden_audit.sql",
+    "docker:restart": "docker compose restart app",
+    "docker:rebuild": "docker compose up -d --build",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:verbose": "jest --verbose",
+    "test:vuln-01": "jest vuln-01-tenant-bypass",
+    "test:vuln-02": "jest vuln-02-sql-injection",
+    "test:vuln-03": "jest vuln-03-rbac-escalation",
+    "test:vuln-04": "jest vuln-04-jwt-weak-secret",
+    "test:vuln-05": "jest vuln-05-defense-in-depth"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^18.0.3",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.12.0",
+    "swagger-jsdoc": "^6.3.0",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/express": "^4.17.21",
+    "@types/jest": "^30.0.0",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/node": "^20.14.0",
+    "@types/pg": "^8.20.0",
+    "@types/supertest": "^7.2.1",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.8",
+    "jest": "^30.5.2",
+    "supertest": "^7.3.1",
+    "ts-jest": "^29.4.14",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.5.4"
+  }
+}
